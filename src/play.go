@@ -5,7 +5,12 @@ import (
 )
 
 func main() {
-  // s1 := []int{1,2,3,4}
-  fmt.Println(s1)
-  fmt.Println(reflect.TypeOf(s1))
+  s1 := 4.0
+  fmt.Println(s1, "is a", reflect.TypeOf(s1))
+
+  for key, value := range map[string]string{"Bob":"yes", "Bill":"yes", "Joe":"no"} {
+        // for each pair in the map, print key and value
+        fmt.Printf("key=%s, value=%s\n", key, value)
+    }
+
 }
