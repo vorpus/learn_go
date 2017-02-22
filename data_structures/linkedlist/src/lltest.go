@@ -12,6 +12,20 @@ func NewLinkedList() LinkedList {
   return LinkedList{nil}
 }
 
+func (ll *LinkedList) Reverse() {
+  curNode := ll.first
+  var nextNode *LLnode
+  var prevNode *LLnode
+
+  for curNode != nil {
+    nextNode = curNode.next
+    curNode.next = prevNode
+    prevNode = curNode
+    curNode = nextNode
+  }
+  ll.first = prevNode
+}
+
 func (ll *LinkedList) Add(val int) {
   newNode := LLnode{val, nil}
 
@@ -90,29 +104,29 @@ func (n *LLnode) Value() int {
 
 func main() {
   ll := NewLinkedList()
+  ll.Add(1)
+  ll.Add(2)
+  ll.Add(3)
   ll.Add(4)
   ll.Add(5)
-  ll.Add(7)
-  ll.Add(2)
-  ll.Add(51)
-  ll.Add(3)
   ll.Add(6)
   fmt.Println("First:", ll.First().val)
   fmt.Println("Last:", ll.Last().val)
-  ll.Add(99)
+  ll.Add(7)
   ll.PrintAll()
 
   fmt.Println()
-  foundFO := ll.Find(51)
-  fmt.Printf("Find existing node: %d (%T)\n", foundFO.val, foundFO)
+  fmt.Println("Find missing node:", ll.Find(7))
   fmt.Println("Find missing node:", ll.Find(52))
   fmt.Println()
 
-  ll.Delete(4)
+  ll.Delete(6)
   ll.PrintAll()
   ll.Delete(51)
   ll.PrintAll()
-  ll.Delete(52)
+
+  fmt.Println()
+  ll.Reverse()
   ll.PrintAll()
 
 }
